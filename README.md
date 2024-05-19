@@ -4,6 +4,7 @@
 A university recommender system offering admission chances for postgrad studies along with information about universities, admission process, courses, and scholarships, addressing student queries. Our algorithm  considers various factors like GRE score,toefl score,GPA,budget and other many other factors and recommends top 20 universities which are divided into "Safe","Ambitious" and "Moderate" universities. University Recommendations are done by utilizing a hybrid CF model by combining Neural Collaborative filtering(Multilayer Perceptron) and KNN. Here MLP model is used as it is unexplored in the field of recommendations but Deep learning has shown promising accuracy in other tasks. The model acheived 92.02% training and 73.74% testing accuracy. To improve the accuracy of our predictions further, we have incorporated a feedback loop.
 Further, for overall admit percent prediction, customized ANN model is used.
 For chatbot, ChatGPT3.5 API is used.
+For more details, checkout the presentation at: https://coepac-my.sharepoint.com/:p:/g/personal/mahajanaa20_comp_coeptech_ac_in/EYj265_xPD9Mi8AsxTZNQhUBEavA0OMDuOXKDUmwnNufKg?e=n2ACiA
 
 
 ## Features
@@ -41,7 +42,7 @@ Filtering.Intially the model based CF is used,in which the Multi Layer Perceptro
 ![hybrid_model_arch2 drawio](https://github.com/Sayali492/Admit-Hub/assets/78889572/b9d09596-23ae-4775-8253-b6d3321c16e6)
 
 For overall admit percent prediction, custom ANN model is built. Architecture is shown in diagram below:
-![overall_admit_model_arch](https://github.com/Sayali492/Admit-Hub/assets/78889572/683d0e84-4363-437b-8fed-4e714ee220d5)
+![image](https://github.com/Sayali492/Admit-Hub/assets/78889572/98dbfacd-865d-4990-a23e-86f37dc88104)
 
 
 ## Web Application Demo
