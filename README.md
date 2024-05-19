@@ -48,7 +48,7 @@ For overall admit percent prediction, custom ANN model is built. Architecture is
 The Demo is available at link: https://drive.google.com/file/d/1OWZzhkIgyNaHeb4Pf5DLOI_pcwnlMbXw/view?usp=sharing 
 
 
-## Run Locally
+## Run Locally- UI
 
 Clone the project
 
