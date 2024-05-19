@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Validation Form</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom styles */
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 class="text-center mb-4">Validation Form</h2>
+      <form class="form-container">
+        <div class="form-group">
+          <label for="degree">Degree:</label>
+          <select class="form-control" id="degree">
+            <option value="Bachelor">Bachelor</option>
+            <option value="Master">Master</option>
+            <option value="PhD">PhD</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="gpa">GPA:</label>
+          <input type="number" class="form-control" id="gpa" step="0.01" min="0" max="4.0">
+        </div>
+        <div class="form-group">
+          <label for="gpaScale">GPA Scale:</label>
+          <select class="form-control" id="gpaScale">
+            <option value="5">5</option>
+            <option value="100">100</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="greQ">GRE Quantitative:</label>
+          <input type="number" class="form-control" id="greQ" min="130" max="170">
+        </div>
+        <div class="form-group">
+          <label for="greAWA">GRE Analytical Writing:</label>
+          <input type="number" class="form-control" id="greAWA" min="0" max="6">
+        </div>
+        <div class="form-group">
+          <label for="toefl">TOEFL:</label>
+          <input type="number" class="form-control" id="toefl" min="0">
+        </div>
+        <div class="form-group">
+          <label for="budget">Budget (in dollars):</label>
+          <input type="number" class="form-control" id="budget" min="0">
+        </div>
+        <div class="form-group">
+          <label for="researchWork">Research Work:</label>
+          <select class="form-control" id="researchWork">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="publication">Publication:</label>
+          <select class="form-control" id="publication">
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Bootstrap JS and jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+</body>
+</html>

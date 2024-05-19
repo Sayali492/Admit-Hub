@@ -1,0 +1,12 @@
+/* Set pink background for the entire page */
+body {
+    background-color: #f2daa6; /* Pink color */
+}
+
+/* Style the form container */
+.container {
+    background-color: #fefefe; /* White color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.6); /* Add shadow effect */
+    padding: 20px; /* Add some padding to the container */
+    margin-top: 20px; /* Add gap between division above and container */
+}

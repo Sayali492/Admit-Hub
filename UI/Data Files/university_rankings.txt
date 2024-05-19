@@ -1,0 +1,117 @@
+west virginia university institute of technology: 0
+university of minnesotta twin cities: 1
+rutgers university new brunswick: 2
+rutgers university piscataway: 3
+university of minnesotta: 4
+northern illinois university: 5
+pennsylvania state university: 6
+university of north carolina at charlotte: 7
+san diego state university: 8
+wayne state university: 9
+university of north texas: 10
+university of texas arlington: 11
+texas tech university: 12
+university of arkansas: 13
+san francisco state university: 14
+university of alabama at birmingham: 15
+university of hawaii at manoa: 16
+university of maryland: 17
+university of nebraska lincoln: 18
+university of wyoming: 19
+university of illinois chicago: 20
+university of south carolina: 21
+university of south florida: 22
+university of tennessee at knoxville: 23
+university of tulsa: 24
+university of georgia: 25
+university of florida: 26
+university of massachusetts amherst: 27
+university of vermont: 28
+university of kansas: 29
+university of iowa: 30
+university of utah: 31
+university of maryland college park: 32
+university of kentucky: 33
+university of pittsburgh: 34
+university of central florida: 35
+virginia polytechnic institute and state university: 36
+university of connecticut: 37
+portland state university: 38
+washington state university: 39
+university of oregon: 40
+university of houston: 41
+san jose state university: 42
+university of arizona: 43
+university of wisconsin milwaukee: 44
+university of california riverside: 45
+university of delaware: 46
+university of north carolina at chapel hill: 47
+university of michigan: 48
+university of wisconsin madison: 49
+texas a&m university college station: 50
+arizona state university: 51
+illinois state university: 52
+georgia state university: 53
+oregon state university: 54
+east carolina university: 55
+ohio state university: 56
+university at buffalo suny: 57
+university of colorado boulder: 58
+university of cincinnati: 59
+university of california santa barbara: 60
+university of california irvine: 61
+university of texas at dallas: 62
+university of california davis: 63
+university of washington: 64
+university of california san diego: 65
+university of california los angeles: 66
+university of toronto: 67
+university of oxford: 68
+university of wisconsin: 69
+george washington state university: 70
+university of illinois urbana champaign: 71
+brown university: 72
+american university: 73
+yale university: 74
+iowa state university: 75
+colorado state university: 76
+northeastern university: 77
+florida state university: 78
+north carolina state university raleigh: 79
+clemson university: 80
+michigan state university: 81
+louisiana state university: 82
+new jersey institute of technology: 83
+city university of new york: 84
+michigan technological university: 85
+george mason university: 86
+purdue university west lafayette: 87
+boston university: 88
+indiana bloomington university: 89
+university of denver: 90
+georgia institute of technology: 91
+syracuse university: 92
+university of california santa cruz: 93
+cornell university: 94
+carnegie mellon university: 95
+stony brook university: 96
+worcester polytechnic institute: 97
+university of rochester: 98
+mcgill university: 99
+new york university: 100
+georgetown university: 101
+university of notre dame: 102
+columbia university: 103
+university of southern california: 104
+university of texas at austin: 105
+university of virginia: 106
+university of california berkeley: 107
+princeton university: 108
+university of pennsylvania: 109
+john hopkins university: 110
+duke university: 111
+university of chicago: 112
+northwestern university: 113
+vanderbilt university: 114
+stanford university: 115
+harvard university: 116

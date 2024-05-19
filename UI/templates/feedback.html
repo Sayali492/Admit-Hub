@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- Bootstrap CSS -->
+  <link href="{{ url_for('static',filename='style.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: #edf2f6;
+  font-family: Arial;
+  color: #444;
+}
+        h3 {
+  margin-top: 40px; /* Adjust the margin-top value as needed */
+  margin-bottom:10px;
+
+}
+        .panel-container {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  font-size: 90%;
+  justify-content: center;
+  max-width: 400px;
+  padding: 30px;
+  text-align: center;
+  margin-left:320px;
+  margin-top:80px;
+  width:60%;
+}
+
+.panel-container strong {
+  line-height: 20px;
+}
+
+.ratings-container {
+  display: flex;
+  margin: 20px 0;
+}
+
+.rating {
+  flex: 1;
+  margin: 10px 5px;
+  padding: 20px;
+}
+
+.rating:hover,
+.rating.active {
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.rating img {
+  cursor: pointer;
+  width: 40px;
+}
+
+.rating small {
+  color: #555;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 0 0;
+}
+
+.rating:hover small,
+.rating.active small {
+  color: #111;
+}
+
+.btn {
+  background-color: #302d2b;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 12px 30px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.fa-heart {
+  color: red;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+.form-select{
+height:40px;
+
+        }
+    </style>
+</head>
+
+<body>
+  <header id="header" class="fixed-top" style="background-color: #7e761a;">
+    <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+</header>
+<br><br><br>
+    <div class="container">
+         <div id="panel" class="panel-container">
+        <form method="POST" action="/feedback">
+            {{ form.csrf_token }}
+            <div class="form-row">
+                <h3>Please let us know which universities were you expecting?</h3>
+                <div class="input-group mb-3">
+<!--                    <label class="input-group-text" for="university">Options</label>-->
+                    <select style="text-transform: capitalize;" class="form-select" id="course" name="university1">
+                        <option selected>University 1</option>
+                        {% for value, label in options %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <br>
+             <div class="form-row">
+                <div class="input-group mb-3">
+<!--                    <label class="input-group-text" for="university">Options</label>-->
+                    <select style="text-transform: capitalize;" class="form-select" id="course" name="university2">
+                        <option selected>University 2</option>
+                        {% for value, label in options %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <br>
+             <div class="form-row">
+                <div class="input-group mb-3">
+<!--                    <label class="input-group-text" for="university">Options</label>-->
+                    <select style="text-transform: capitalize;" class="form-select" id="course" name="university3">
+                        <option selected>University 3</option>
+                        {% for value, label in options %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button id="send" type="submit" class="btn btn-primary">Submit Feedback</button>
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+<script>
+    console.log("In 1");
+   const sendBtn = document.querySelector("#send");
+ const panel = document.querySelector("#panel");
+    sendBtn.addEventListener("click", () => {
+   panel.innerHTML = `
+     <i class="fa fa-heart"></i>
+     <strong>Thank You!</strong>
+     <br>
+     <p>We'll use your feedback to improve our recommendations</p>
+   `;
+   console.log("In 2");
+});
+</script>
+</html>

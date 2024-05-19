@@ -1,0 +1,65 @@
+audiology: 0
+chemistry: 1
+civil engineering: 2
+computer science: 3
+economics: 4
+educational studies: 5
+english: 6
+geography: 7
+history: 8
+industrial systems engineering: 9
+mechanical engineering: 10
+physics: 11
+political science: 12
+psychology: 13
+speech pathology: 14
+aeronautical engineering: 15
+agricultural economics: 16
+anthropology: 17
+architecture: 18
+art history: 19
+biology: 20
+biostatistics: 21
+business analytics: 22
+chemical biomolecular engineering: 23
+chemical engineering: 24
+city planning: 25
+communication studies: 26
+counselling: 27
+data science: 28
+electrical engineering: 29
+electronics telecommunication engineering: 30
+epidemiology: 31
+human computer interaction: 32
+international affairs: 33
+linguistics: 34
+management: 35
+material science engineering: 36
+mathematics: 37
+microbiology: 38
+molecular biology: 39
+neuroscience: 40
+operations research and industrial engineering: 41
+philosophy: 42
+public administration: 43
+public affairs: 44
+public health: 45
+public policy: 46
+robotic system: 47
+social work foundation: 48
+statistics: 49
+structural and civil engineering: 50
+urban regional planning: 51
+astronomy: 52
+bioengineering: 53
+bioinformatics: 54
+biomedical engineering: 55
+biomedical science: 56
+engineering management: 57
+environmental engineering: 58
+petroleum engineering: 59
+computer engineering: 60
+information security: 61
+information system: 62
+classical studies: 63
+religious studies: 64

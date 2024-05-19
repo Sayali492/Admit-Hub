@@ -1,0 +1,720 @@
+<!DOCTYPE>
+<html>
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <!-- Include Bootstrap CSS -->
+    <link href="{{ url_for('static',filename='style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
+            type="text/javascript"></script>
+    <style>
+.card {
+    margin-bottom: 20px;
+}
+
+.service-card {
+    width: 100%;
+    height: 100%;
+    padding: 2em 1.5em;
+    border-radius: 5px;
+    box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+    cursor: pointer;
+    transition: 0.5s;
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    background: #fff; /* Initial background color */
+    margin-bottom: 20px; /* Vertical gap between cards */
+    margin-top: 20px; 
+}
+
+.service-card:hover {
+    background: linear-gradient(135deg, #ff5d9e, #8f71ff, #82acff, #8bffff); /* Gradient background on hover */
+    transform: scale(1.05); /* Enlarge the card on hover */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.3);
+}
+
+.service-card h3 {
+    font-size: 20px;
+    text-transform: capitalize;
+    font-weight: 600;
+    color: #1f194c;
+    margin: 1em 0;
+    z-index: 3;
+}
+
+.service-card p {
+    color: #575a7b;
+    font-size: 15px;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
+    z-index: 3;
+}
+h1{
+  margin-top:20px;
+
+}
+.icon-wrapper {
+    background-color: #4279d8;
+    position: relative;
+    margin: auto;
+    font-size: 30px;
+    height: 2.5em;
+    width: 2.5em;
+    color: #ffffff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    transition: 0.5s;
+    z-index: 3;
+}
+
+.service-card:hover .icon-wrapper {
+    color: #0dcaf0;
+}
+
+.service-card:hover h3,
+.service-card:hover p {
+    color: inherit; /* Maintain original text color when hovering */
+}
+        /* Mixings &  Variables */
+  @import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+.clearfix,
+.clearfix:before,
+.clearfix:after {
+  display: block;
+  content: " ";
+  clear: both;
+  zoom: 1;
+}
+
+/* Resets */
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+body {
+  background: #edf2f6;
+  font-family: Arial;
+  color: #444;
+}
+.wrap {
+  margin: 0 auto;
+  padding: 50px;
+  max-width: 1200px;
+}
+/* Bar Graph Class */
+.barGraph {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
+}
+.graph {
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: calc(75% - 2%);
+  left: 4%;
+}
+.graph-barBack {
+  border-radius: 2px;
+  background: #dae4eb;
+  margin-bottom: 10px;
+  display: block;
+  margin-left:150px;
+}
+.graph-bar {
+  background-color: #97b5e8;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+/*   margin-left:20px; */
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 30px;
+  width: 0%;
+  text-transform: capitalize;
+  color:#050505;
+  font-weight:550px;
+
+}
+.graph-bar:hover {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #8fb3ec;
+}
+.graph-bar:last-child {
+  margin-bottom: 0;
+}
+.graph-bar:after {
+  position: absolute;
+  content: attr(data-value);
+  display: none;
+  font-size: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  margin-left: 15px;
+  left: 100%;
+  top: 0;
+}
+.graph-bar:hover:after {
+  display: block;
+}
+.graph-legend {
+  position: absolute;
+  justify:right;
+  margin-right: 10px;
+/*   left: -350px; */
+  margin-left:10px;
+  z-index: 9999;
+}
+.wrap1 {
+  margin: 0 auto;
+  padding: 50px;
+  max-width: 1200px;
+}
+/* Bar Graph Class */
+.barGraph1 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
+}
+.graph1 {
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: calc(50% - 18%);
+  left: 4%;
+}
+.graph-barBack1 {
+  border-radius: 2px;
+  background: #dae4eb;
+  margin-bottom: 10px;
+  display: block;
+  margin-left:150px;
+}
+.graph-bar1 {
+  background-color: #97b5e8;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+/*   margin-left:20px; */
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 30px;
+  width: 0%;
+  text-transform: capitalize;
+  color:#050505;
+  font-weight:550px;
+
+}
+.graph-bar1:hover {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #8fb3ec;
+}
+.graph-bar1:last-child {
+  margin-bottom: 0;
+}
+.graph-bar1:after {
+  position: absolute;
+  content: attr(data-value);
+  display: none;
+  font-size: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  margin-left: 15px;
+  left: 100%;
+  top: 0;
+}
+.graph-bar1:hover:after {
+  display: block;
+}
+.graph-legend1 {
+  position: absolute;
+  justify:right;
+  margin-right: 10px;
+/*   left: -350px; */
+  margin-left:10px;
+  z-index: 9999;
+}
+.wrap2 {
+  margin: 0 auto;
+  padding: 50px;
+  max-width: 1200px;
+}
+/* Bar Graph Class */
+.barGraph2 {
+  position: relative;
+  width: 100%;
+  height: auto;
+  margin-bottom: 50px;
+}
+.graph2 {
+  position: relative;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: calc(100% - 30%);
+  left: 4%;
+}
+.graph-barBack2 {
+  border-radius: 2px;
+  background: #dae4eb;
+  margin-bottom: 10px;
+  display: block;
+  margin-left:150px;
+}
+.graph-bar2 {
+  background-color: #97b5e8;
+  -webkit-transition: all 1s ease-out;
+  -moz-transition: all 1s ease-out;
+  -o-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+  border-radius: 2px;
+  cursor: pointer;
+  margin-bottom: 10px;
+/*   margin-left:20px; */
+  position: relative;
+  z-index: 2;
+  display: block;
+  height: 30px;
+  width: 0%;
+  text-transform: capitalize;
+  color:#050505;
+  font-weight:550px;
+
+}
+.graph-bar2:hover {
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  background: #8fb3ec;
+}
+.graph-bar2:last-child {
+  margin-bottom: 0;
+}
+.graph-bar2:after {
+  position: absolute;
+  content: attr(data-value);
+  display: none;
+  font-size: 12px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  line-height: 20px;
+  height: 20px;
+  padding: 0 10px;
+  margin-left: 15px;
+  left: 100%;
+  top: 0;
+}
+.graph-bar2:hover:after {
+  display: block;
+}
+.graph-legend2 {
+  position: absolute;
+/*   justify:right; */
+  margin-right: 10px;
+/*   left: -350px; */
+  margin-left:10px;
+  z-index: 9999;
+  white-space: nowrap; /* Ensures text stays on one line */
+}
+
+
+.panel-container {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  font-size: 90%;
+  justify-content: center;
+  max-width: 400px;
+  padding: 30px;
+  text-align: center;
+  margin-left:320px;
+  margin-top:80px;
+}
+
+.panel-container strong {
+  line-height: 20px;
+}
+
+.ratings-container {
+  display: flex;
+  margin: 20px 0;
+}
+
+.rating {
+  flex: 1;
+  margin: 10px 5px;
+  padding: 20px;
+}
+
+.rating:hover,
+.rating.active {
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.rating img {
+  cursor: pointer;
+  width: 40px;
+}
+
+.rating small {
+  color: #555;
+  cursor: pointer;
+  display: inline-block;
+  margin: 10px 0 0;
+}
+
+.rating:hover small,
+.rating.active small {
+  color: #111;
+}
+
+.btn {
+  background-color: #302d2b;
+  border: 0;
+  border-radius: 4px;
+  color: #fff;
+  cursor: pointer;
+  padding: 12px 30px;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.fa-heart {
+  color: red;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+
+        .card {
+              margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+  <header id="header" class="fixed-top" style="background-color: #7e761a;">
+    <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+          <li><a class="nav-link scrollto active" href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+</header>
+<br><br><br><br><br>
+  <div class="container">
+    
+    <h1 class="text-center">Prediction Results</h1>
+    <h4 style="text-align: center;">Your chance of getting an admit from any university in USA is: {{admit_percent_overall}} %</h4>
+    <br><br><br><br>
+    <h2 style="text-align: center;background-color: #97b5e8;display: inline-block;margin-left: 430px;">Ambitious Universities</h2>
+    <div class="row">
+      
+      <br><br><br>
+        {% for prediction3 in predictions3 %}
+        <div class="col-md-4" style="padding: 2rem;">
+            <div class="service-card">
+                <div class="icon-wrapper">
+                  <div class="icon"><i class="fas fa-university"></i></div>
+                   
+                </div>
+                <h3>{{ prediction3[3] }}</h3>
+                <p>Admit Percent: {{ prediction3[2] }} %</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+    <br><br><br><br>
+    <h2 style="text-align: center;background-color: #97b5e8;display: inline-block;margin-left: 430px;">Moderate Universities</h2>
+    <br><br>
+    <div class="row">
+      
+        {% for prediction2 in predictions2 %}
+        <div class="col-md-4" style="padding: 2rem;">
+            <div class="service-card">
+                <div class="icon-wrapper">
+                  <div class="icon"><i class="fas fa-university"></i></div>
+                    
+                </div>
+                <h3>{{ prediction2[3] }}</h3>
+                
+                <p>Admit Percent: {{ prediction2[2] }} %</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+    
+    <br><br><br><br>
+<h2 style="text-align: center;background-color: #97b5e8;display: inline-block;margin-left: 430px;">Safe Universities</h2>
+    <br><br>
+    <div class="row">
+      
+        {% for prediction1 in predictions1 %}
+        <div class="col-md-4" style="padding: 2rem;">
+            <div class="service-card">
+                <div class="icon-wrapper">
+                  <div class="icon"><i class="fas fa-university"></i></div>
+             
+                </div>
+                <h3>{{ prediction1[3] }}</h3>
+               
+                <p>Admit Percent: {{ prediction1[2] }} %</p>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        {% endfor %}
+    </div>
+</div>
+<div class="wrap">
+    <h4 style="text-align: center;">Average Toefl Scores for Top 5 Universities</h4>
+    <div class="barGraph">
+        <ul class="graph">
+      <span class="graph-barBack">
+        <li class="graph-bar" data-value={{avg_scores_by_university.iloc[0]['toeflScore']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend">{{ avg_scores_by_university.iloc[0]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack">
+        <li class="graph-bar" data-value={{avg_scores_by_university.iloc[1]['toeflScore']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend">{{ avg_scores_by_university.iloc[1]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack">
+        <li class="graph-bar" data-value={{avg_scores_by_university.iloc[2]['toeflScore']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend">{{ avg_scores_by_university.iloc[2]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack">
+        <li class="graph-bar" data-value={{avg_scores_by_university.iloc[3]['toeflScore']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend">{{ avg_scores_by_university.iloc[3]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack">
+        <li class="graph-bar" data-value={{avg_scores_by_university.iloc[4]['toeflScore']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend">{{ avg_scores_by_university.iloc[4]['University Name'] }}</span>
+        </li>
+      </span>
+
+
+            </li>
+            </span>
+        </ul>
+    </div>
+</div>
+<div class="wrap1">
+    <h4 style="text-align: center;">Average GRE Scores for Top 5 Universities</h4>
+    <div class="barGraph1">
+        <ul class="graph1">
+      <span class="graph-barBack1">
+        <li class="graph-bar1" data-value={{avg_scores_by_university.iloc[0]['gre_total']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend1">{{ avg_scores_by_university.iloc[0]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack1">
+        <li class="graph-bar1" data-value={{avg_scores_by_university.iloc[1]['gre_total']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend1">{{ avg_scores_by_university.iloc[1]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack1">
+        <li class="graph-bar1" data-value={{avg_scores_by_university.iloc[2]['gre_total']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend1">{{ avg_scores_by_university.iloc[2]['University Name'] }} </span>
+        </li>
+      </span>
+            <span class="graph-barBack1">
+        <li class="graph-bar1" data-value={{avg_scores_by_university.iloc[3]['gre_total']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend1">{{ avg_scores_by_university.iloc[3]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack1">
+        <li class="graph-bar1" data-value={{avg_scores_by_university.iloc[4]['gre_total']}}>
+          <span style="font-size: 1.2rem;" class="graph-legend1"> {{ avg_scores_by_university.iloc[4]['University Name'] }}</span>
+        </li>
+      </span>
+            </li>
+            </span>
+        </ul>
+    </div>
+</div>
+<div class="wrap2">
+    <h4 style="text-align: center;">Average GPA Scores for Top 5 Universities</h4>
+    <div class="barGraph2">
+        <ul class="graph2">
+      <span class="graph-barBack2">
+        <li class="graph-bar2" data-value={{avg_scores_by_university.iloc[0]['GPA']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend2">{{ avg_scores_by_university.iloc[0]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack2">
+        <li class="graph-bar2" data-value={{avg_scores_by_university.iloc[1]['GPA']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend2">{{ avg_scores_by_university.iloc[1]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack2">
+        <li class="graph-bar2" data-value={{avg_scores_by_university.iloc[2]['GPA']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend2">{{ avg_scores_by_university.iloc[2]['University Name'] }} </span>
+        </li>
+      </span>
+            <span class="graph-barBack2">
+        <li class="graph-bar2" data-value={{avg_scores_by_university.iloc[3]['GPA']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend2">{{ avg_scores_by_university.iloc[3]['University Name'] }}</span>
+        </li>
+      </span>
+            <span class="graph-barBack2">
+        <li class="graph-bar2" data-value={{avg_scores_by_university.iloc[4]['GPA']}}>
+          <span style="font-size: 1.2rem;"class="graph-legend2"> {{ avg_scores_by_university.iloc[4]['University Name'] }}</span>
+        </li>
+      </span>
+            </li>
+            </span>
+        </ul>
+        <div id="panel" class="panel-container">
+            <strong>
+                How satisfied are you with our <br/>
+                university recommendations?
+            </strong>
+            <div class="ratings-container">
+                <div class="rating" data-rating="Unhappy">
+                    <img src="https://cdn-icons-png.flaticon.com/512/187/187150.png" alt="sad face"/>
+                    <small>Unhappy</small>
+                </div>
+                <div class="rating" data-rating="Neutral">
+                    <img src="https://cdn-icons-png.flaticon.com/512/187/187136.png" alt="neutral face"/>
+                    <small>Neutral</small>
+                </div>
+                <div class="rating active" data-rating="Satisfied">
+                    <img src="https://cdn-icons-png.flaticon.com/512/187/187133.png" alt="happy face"/>
+                    <small>Satisfied</small>
+                </div>
+            </div>
+            <button type="submit" class="btn" id="send">Send Review</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    // Produces width of .barChart
+ $(document).ready(function () {
+   $(".graph-bar").each(function () {
+     var dataWidth = $(this).data("value");
+     $(this).css("width", dataWidth + "%");
+   });
+ });
+
+  $(document).ready(function () {
+   $(".graph-bar1").each(function () {
+     var dataWidth = $(this).data("value");
+     $(this).css("width", dataWidth + "%");
+   });
+ });
+     $(document).ready(function () {
+   $(".graph-bar2").each(function () {
+     var dataWidth = $(this).data("value") * 25;
+     $(this).css("width", dataWidth + "%");
+   });
+ });
+ console.log("Inside feedback js");
+     const ratings = document.querySelectorAll(".rating");
+ const ratingsContainer = document.querySelector(".ratings-container");
+ const sendBtn = document.querySelector("#send");
+ const panel = document.querySelector("#panel");
+ let selectedRating = "Satisfied";
+
+ ratingsContainer.addEventListener("click", (e) => {
+   if (e.target.parentNode.classList.contains("rating")) {
+     removeActive();
+     selectedRating = e.target.closest(".rating").dataset.rating;
+     e.target.closest(".rating").classList.add("active");
+   }
+ });
+
+<!-- sendBtn.addEventListener("click", () => {-->
+<!--   panel.innerHTML = `-->
+<!--     <i class="fa fa-heart"></i>-->
+<!--     <strong>Thank You!</strong>-->
+<!--     <br>-->
+<!--     <strong>Feedback: ${selectedRating}</strong>-->
+<!--     <p>We'll use your feedback to improve our customer support</p>-->
+<!--   `;-->
+
+<!--   // Redirect to a new page-->
+<!--  window.location.href = "/feedback";-->
+<!-- });-->
+
+sendBtn.addEventListener("click", () => {
+    if (selectedRating === "Unhappy") {
+      window.location.href = "/feedback"; // Replace "unhappy_page.html" with the URL of the page you want to redirect to
+    } else {
+      panel.innerHTML = `
+        <i class="fa fa-heart"></i>
+        <strong>Thank You!</strong>
+        <br>
+        <strong>Feedback: ${selectedRating}</strong>
+        <p>We'll use your feedback to improve our recommendations.</p>
+      `;
+    }
+  });
+
+ function removeActive() {
+   ratings.forEach((rating) => rating.classList.remove("active"));
+ }
+
+</script>
+</body>
+</html>
+

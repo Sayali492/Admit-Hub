@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ url_for('static',filename='style1.css')}}" rel="stylesheet">
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="assets/img/favicon.png" rel="icon">
+    <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static',filename='style1.css')}}" rel="stylesheet">
+  <link href="{{ url_for('static',filename='style.css')}}" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        #course{
+            text-transform: capitalize;
+        }
+    </style>
+</head>
+
+<body style="background-color: #f5e1da;">
+  
+
+    <header id="header" class="fixed-top" style="background-color: #7e761a;">
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+              <li><a class="nav-link scrollto active" href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+              <li><a class="nav-link scrollto " href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+              <li><a class="nav-link scrollto" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+              <li><a class="nav-link scrollto" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </header>
+
+
+
+  <br>
+  <br>
+  <br>
+  <div style="margin-top:60px;"class="container">
+    <form method="POST" action="/rec_uni">
+        {{ form.csrf_token }}
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="gpa">GPA<span style="color: red;">*</span></label>
+                <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GPA" pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid GPA (up to 2 decimal places)" required>
+            </div>
+            
+            <div class="form-group col-md-4">
+                <label for="scale">Scale<span style="color: red;">*</span></label>
+                <select id="scale" class="form-control" name="scale" onchange="validateGPA()" required>
+                    <option selected disabled>Choose</option>
+                    <option value="4">4</option>
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="100">100</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="toefl">TOEFL Score<span style="color: red;">*</span></label>
+                <input type="number" class="form-control" id="toefl" name="toefl" placeholder="TOEFL Score" min="0" max="120" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="gre_quant">GRE Quant<span style="color: red;">*</span></label>
+                <input type="number" class="form-control" id="gre_quant" name="gre_quant" placeholder="GRE Quant" min="130" max="170" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="gre_verbal">GRE Verbal<span style="color: red;">*</span></label>
+                <input type="number" class="form-control" id="gre_verbal" name="gre_verbal" placeholder="GRE Verbal" min="130" max="170" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="gre_awa">GRE AWA<span style="color: red;">*</span></label>
+                <input type="number" class="form-control" id="gre_awa" name="gre_awa" placeholder="GRE AWA" min="0" max="6" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="publications">Publications</label><br>
+                <input type="radio" id="pub_yes" name="publication" value="1">
+                <label for="pub_yes">Yes</label>
+                <input type="radio" id="pub_no" name="publication" value="0">
+                <label for="pub_no">No</label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="research_exp">Research Experience</label><br>
+                <input type="radio" id="res_yes" name="re_exp" value="1">
+                <label for="res_yes">Yes</label>
+                <input type="radio" id="res_no" name="re_exp" value="0">
+                <label for="res_no">No</label>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="work_exp">Work Experience</label><br>
+                <input type="radio" id="work_yes" name="work_exp" value="1">
+                <label for="work_yes">Yes</label>
+                <input type="radio" id="work_no" name="work_exp" value="0">
+                <label for="work_no">No</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="budget">Budget in Dollars</label>
+                <input type="number" class="form-control" id="budget" name="budget" placeholder="Budget in Dollars">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="degree">Degree<span style="color: red;">*</span></label>
+                <select id="degree" class="form-control" name="degree" required>
+                    <option selected disabled>Choose</option>
+                    <option value="1">Masters</option>
+                    <option value="0">Masters and PhD</option>
+                    <option value="3">PhD</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="rank">University Rank<span style="color: red;">*</span></label>
+                <select id="rank" class="form-control" name="rank" required>
+                    <option selected disabled>Choose</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="input-group mb-3">
+                <label class="input-group-text" for="course">Course<span style="color: red;">*</span></label>
+                <select class="form-select" id="course" name="course" required>
+                    <option selected disabled>Choose...</option>
+                    {% for value, label in options %}
+                    <option value="{{ value }}">{{ label }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">Predict</button>
+    </form>
+</div>
+
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+    <script>
+    function validateGPA() {
+        var gpaInput = document.getElementById("gpa");
+        var scaleSelect = document.getElementById("scale");
+        var selectedScale = parseInt(scaleSelect.value);
+    
+        var minGPA = 0;
+        var maxGPA = selectedScale;
+    
+        var gpa = parseFloat(gpaInput.value);
+    
+        if (isNaN(gpa) || gpa < minGPA || gpa > maxGPA) {
+            // alert("GPA must be between " + minGPA + " and " + maxGPA + " for the selected scale.");
+            alert("Scale doesn't matches the entered GPA")
+            gpaInput.value = "";
+            return false;
+        }
+    
+        return true;
+    }
+</script>
+    
+    
+</body>
+
+</html>

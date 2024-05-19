@@ -1,0 +1,425 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins',sans-serif;
+}
+body{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.container{
+  max-width: 700px;
+  width: 100%;
+  background-color: #fff;
+  padding: 25px 30px;
+  border-radius: 5px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.15);
+}
+.container .title{
+  font-size: 25px;
+  font-weight: 500;
+  position: relative;
+}
+.container .title::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 3px;
+  width: 30px;
+  border-radius: 5px;
+  background: linear-gradient(135deg, #71b7e6, #9b59b6);
+}
+.content form .user-details{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
+}
+form .user-details .input-box{
+  margin-bottom: 15px;
+  width: calc(100% / 2 - 20px);
+}
+form .input-box span.details{
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.user-details .input-box input{
+  height: 45px;
+  width: 100%;
+  outline: none;
+  font-size: 16px;
+  border-radius: 5px;
+  padding-left: 15px;
+  border: 1px solid #ccc;
+  border-bottom-width: 2px;
+  transition: all 0.3s ease;
+}
+.user-details .input-box input:focus,
+.user-details .input-box input:valid{
+  border-color: #9b59b6;
+}
+ form .gender-details .gender-title{
+  font-size: 20px;
+  font-weight: 500;
+ }
+ form .category{
+   display: flex;
+   width: 80%;
+   margin: 14px 0 ;
+   justify-content: space-between;
+ }
+ form .category label{
+   display: flex;
+   align-items: center;
+   cursor: pointer;
+ }
+ form .category label .dot{
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  margin-right: 10px;
+  background: #d9d9d9;
+  border: 5px solid transparent;
+  transition: all 0.3s ease;
+}
+ #dot-1:checked ~ .category label .one,
+ #dot-2:checked ~ .category label .two,
+ #dot-3:checked ~ .category label .three{
+   background: #9b59b6;
+   border-color: #d9d9d9;
+ }
+ form input[type="radio"]{
+   display: none;
+ }
+ form .button{
+   height: 45px;
+   margin: 35px 0
+ }
+ form .button input{
+   height: 100%;
+   width: 100%;
+   border-radius: 5px;
+   border: none;
+   color: #fff;
+   font-size: 18px;
+   font-weight: 500;
+   letter-spacing: 1px;
+   cursor: pointer;
+   transition: all 0.3s ease;
+   background: linear-gradient(135deg, #71b7e6, #9b59b6);
+ }
+ form .button input:hover{
+  /* transform: scale(0.99); */
+  background: linear-gradient(-135deg, #71b7e6, #9b59b6);
+  }
+ @media(max-width: 584px){
+ .container{
+  max-width: 100%;
+}
+form .user-details .input-box{
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  form .category{
+    width: 100%;
+  }
+  .content form .user-details{
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .user-details::-webkit-scrollbar{
+    width: 5px;
+  }
+  }
+  .required {
+    color: red;
+    margin-left: 5px; /* Adjust this value as needed for proper alignment */
+  }
+
+  @media(max-width: 459px){
+  .container .content .category{
+    flex-direction: column;
+  }
+  .alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+
+.alert-danger {
+    color: #a94442;
+    background-color: #f2dede;
+    border-color: #ebccd1;
+}
+
+/* Add more styles for different types of messages if needed */
+
+}
+</style>
+  <!-- {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  {% endwith %} -->
+  <!-- <form method="post" action="{{ url_for('register') }}"> -->
+    <!-- <label for="username">Username:</label>
+    <input type="text" name="username" required>
+    <label for="password">Password:</label>
+    <input type="password" name="password" required>
+    <button type="submit">Register</button>
+  </form> -->
+  {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="container">
+                {% for message in messages %}
+                    {% if 'success' in message %}
+                        <div class="alert alert-success">{{ message }}</div>
+                    {% elif 'error' in message %}
+                        <div class="alert alert-danger">{{ message }}</div>
+                    {% else %}
+                        <div class="alert">{{ message }}</div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+  <div class="container">
+    <div class="title">Registration</div>
+    <div class="content">
+        <!-- Add method="post" action="{{ url_for('register') }}" to the form tag -->
+        <form method="post" action="{{ url_for('register') }}" onsubmit="return validateForm()">
+            <div class="user-details">
+              <div class="input-box">
+                <label for="name" class="details">Full Name<span class="required">*</span></label>
+                <input id="name" name="name" type="text" placeholder="Enter your name" required>
+                <div id="nameMessage" class="validation-message"></div>
+            </div>
+            
+            
+                <div class="input-box">
+                    <span class="details">Username<span class="required">*</span></span>
+                    <input name="username" type="text" placeholder="Enter your username" required>
+                    
+                </div>
+                <div class="input-box">
+                    <span class="details">Email<span class="required">*</span></span>
+                    <input name="email" type="email" placeholder="Enter your email" required>
+                    
+                </div>
+                <div class="input-box">
+                  <span class="details">Phone Number<span class="required">*</span></span>
+                  <input name="phone" type="text" placeholder="Enter your number" pattern="[0-9]{10}" title="Please enter a 10-digit number" required>
+              </div>
+              
+              <div class="input-box">
+                <span class="details">Country of origin <span class="required">*</span></span>
+                <input name="country" type="text" placeholder="Country of origin" pattern="[A-Za-z\s]+" title="Please enter valid country name" required>
+            </div>
+            
+            <div class="input-box">
+              <span class="details">UG College Name<span class="required">*</span></span>
+              <input name="ugcollege" type="text" placeholder="UG College Name" pattern="[A-Za-z\s]+" title="Please enter valid college name" required>
+          </div>
+          <div class="input-box">
+              <span class="details">UG Degree<span class="required">*</span></span>
+              <input name="ugdegree" type="text" placeholder="UG Degree" pattern="[A-Za-z\s]+" title="Please enter valid degree" required>
+          </div>
+          
+              
+          <div class="input-box">
+            <label for="password" class="details">Password<span class="required">*</span></label>
+            <input id="password" name="password" type="password" placeholder="Enter your password" required>
+            <div id="passwordRequirements" class="requirements"></div>
+        </div>
+            <!-- <div class="input-box">
+                <span class="details">Confirm Password<span class="required">*</span></span>
+                <input id="confirmPassword" type="password" placeholder="Confirm your password" required>
+                <span id="passwordMatchMessage" style="color: red;"></span>
+            </div> -->
+            <div class="input-box">
+              <label for="confirmPassword" class="details">Confirm Password<span class="required">*</span></label>
+              <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm your password" required>
+              <div id="passwordMatchMessage" class="validation-message"></div>
+          </div>
+            </div>
+            <div class="gender-details">
+                <input type="radio" name="gender" id="dot-1" required>
+                <input type="radio" name="gender" id="dot-2" required>
+                <input type="radio" name="gender" id="dot-3" required>
+                <span class="gender-title">Gender<span class="required">*</span></span>
+                <div class="category">
+                    <label for="dot-1">
+                        <span class="dot one"></span>
+                        <span class="gender">Male</span>
+                    </label>
+                    <label for="dot-2">
+                        <span class="dot two"></span>
+                        <span class="gender">Female</span>
+                    </label>
+                    <label for="dot-3">
+                        <span class="dot three"></span>
+                        <span class="gender">Prefer not to say</span>
+                    </label>
+                </div>
+                
+            </div>
+            <div class="button">
+                <input type="submit" value="Register">
+            </div>
+            <p>If already registered, <a href="/login">Login here</a></p>
+        </form>
+    </div>
+</div>
+<script>
+  function validateForm() {
+    var password = document.getElementById("password").value;
+    var confirmPassword = document.getElementById("confirmPassword").value;
+    var nameInput = document.getElementById("name").value;
+
+    var passwordRequirements = document.getElementById("passwordRequirements");
+    var passwordMatchMessage = document.getElementById("passwordMatchMessage");
+    var nameMessage = document.getElementById("nameMessage");
+
+    
+    var isValidPassword = true;
+
+    
+    if (password.length < 8) {
+        isValidPassword = false;
+    }
+
+    if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+        isValidPassword = false;
+    }
+
+    if (!/\d/.test(password)) {
+        isValidPassword = false;
+    }
+
+    if (isValidPassword) {
+        passwordRequirements.textContent = "Password meets the requirements.";
+    } else {
+        passwordRequirements.textContent = "Password should be at least 8 characters long and include at least 1 special character and 1 digit.";
+    }
+
+ 
+    var isValidName = /^[a-zA-Z\s]+$/.test(nameInput);
+
+   
+    if (!isValidName) {
+        nameMessage.textContent = "Please enter only alphabets.";
+        nameMessage.style.color = "red";
+    } else {
+        nameMessage.textContent = "";
+    }
+
+    if (password !== confirmPassword) {
+        passwordMatchMessage.textContent = "Passwords do not match!";
+        return false;
+    } else {
+        passwordMatchMessage.textContent = "";
+    }
+
+   
+    return isValidPassword && isValidName;
+}
+
+
+document.getElementById("password").addEventListener("input", validateForm);
+document.getElementById("name").addEventListener("input", validateForm);
+document.getElementById("confirmPassword").addEventListener("input", validateForm);
+
+
+
+//   function validateForm() {
+//       var password = document.getElementById("password").value;
+//       var confirmPassword = document.getElementById("confirmPassword").value;
+//       if (password != confirmPassword) {
+//           document.getElementById("passwordMatchMessage").innerHTML = "Passwords do not match!";
+//           return false;
+//       }
+//       return true;
+//   }
+
+//   document.getElementById("password").addEventListener("input", function() {
+//     var password = this.value;
+//     var requirements = document.getElementById("passwordRequirements");
+
+//     var isValid = true;
+
+//     // Check password length
+//     if (password.length < 8) {
+//         isValid = false;
+//     }
+
+//     // Check for special character
+//     if (!/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/.test(password)) {
+//         isValid = false;
+//     }
+
+//     // Check for at least one digit
+//     if (!/\d/.test(password)) {
+//         isValid = false;
+//     }
+
+//     // Update message
+//     if (isValid) {
+//         requirements.textContent = "Password meets the requirements.";
+//     } else {
+//         requirements.textContent = "Password should be at least 8 characters long and include at least 1 special character and 1 digit.";
+//     }
+// });
+
+// document.getElementById("name").addEventListener("input", function() {
+//     var nameInput = this.value;
+//     var nameMessage = document.getElementById("nameMessage");
+
+//     // Regular expression to match only letters
+//     var onlyLetters = /^[a-zA-Z\s]+$/;
+
+//     if (!onlyLetters.test(nameInput)) {
+//         nameMessage.textContent = "Please enter only letters.";
+//         nameMessage.style.color = "red";
+//     } else {
+//         nameMessage.textContent = "";
+//     }
+// });
+document.getElementById("email").addEventListener("input", function() {
+    var emailInput = this.value;
+    var emailMessage = document.getElementById("emailMessage");
+
+    // Regular expression to validate email format
+    var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!emailRegex.test(emailInput)) {
+        emailMessage.textContent = "Please enter a valid email address.";
+        emailMessage.style.color = "red";
+    } else {
+        emailMessage.textContent = "";
+    }
+});
+</script>
+{% endblock %}

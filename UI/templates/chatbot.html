@@ -1,0 +1,444 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--<meta charset="UTF-8">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--<title>Chat with ChatGPT</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<h1>Chat with ChatGPT</h1>-->
+<!--<form id="chatForm" onsubmit="sendMessage(event); return false;" method="post" action="/chatbot">-->
+<!--<label for="userMessage">Your Message:</label>-->
+<!--<input type="text" id="userMessage" name="userMessage">-->
+<!--<button type="submit">Send</button>-->
+<!--</form>-->
+<!--<div id="response">-->
+<!--    {% if response %}-->
+<!--        <p>{{ response }}</p>-->
+<!--    {% endif %}-->
+<!--</div>-->
+
+<!--<script>-->
+<!--function sendMessage(event) {-->
+<!--event.preventDefault(); // Prevent default form submission-->
+
+<!--// Get user message-->
+<!--var message = document.getElementById('userMessage').value;-->
+
+<!--// Send message to Flask server-->
+<!--fetch('/chatbot', {-->
+<!--method: 'POST',-->
+<!--headers: {-->
+<!--'Content-Type': 'application/x-www-form-urlencoded', // Use form-urlencoded format-->
+<!--},-->
+<!--body: 'userMessage=' + encodeURIComponent(message), // Encode message value-->
+<!--})-->
+<!--.then(response => response.text()) // Parse response as text-->
+<!--.then(data => {-->
+<!--// Render the response within the response div-->
+<!--document.getElementById('response').innerHTML = data;-->
+<!--})-->
+<!--.catch(error => {-->
+<!--console.error('Error:', error);-->
+<!--});-->
+<!--}-->
+<!--</script>-->
+<!--</body>-->
+<!--</html>-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head> <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link href="{{ url_for('static',filename='style1.css')}}" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <!-- <link href="{{ url_for('static',filename='style1.css')}}" rel="stylesheet"> -->
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+    rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="assets/vendor/aos/aos.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="{{ url_for('static',filename='style.css')}}" rel="stylesheet">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    :root {
+      --body-bg: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      --msger-bg: #fff;
+      --border: 2px solid #ddd;
+      --left-msg-bg: #ececec;
+      --right-msg-bg: #579ffb;
+    }
+
+    html {
+      box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+      margin: 0;
+      padding: 0;
+      box-sizing: inherit;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      /* background-image: var(--body-bg); */
+      font-family: Helvetica, sans-serif;
+      /* background-color: rgb(244, 214, 143); */
+      background-color: #f5e1da;
+      ;
+    }
+
+    .msger {
+      display: flex;
+      flex-flow: column wrap;
+      justify-content: space-between;
+      width: 100%;
+      max-width: 867px;
+      margin: 25px 10px;
+      height: calc(100% - 50px);
+      border: var(--border);
+      border-radius: 5px;
+      background: var(--msger-bg);
+      box-shadow: 0 15px 15px -5px rgba(0, 0, 0, 0.2);
+      /* margin-top:100px; */
+    }
+
+    .msger-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: var(--border);
+      background: #eee;
+      color: #666;
+      height:65px;
+      
+      
+    }
+   
+
+    .msger-chat {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    .msger-chat::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .msger-chat::-webkit-scrollbar-track {
+      background: #ddd;
+    }
+
+    .msger-chat::-webkit-scrollbar-thumb {
+      background: #bdbdbd;
+    }
+
+    .msg {
+      display: flex;
+      align-items: flex-end;
+      margin-bottom: 10px;
+    }
+
+    .msg:last-of-type {
+      margin: 0;
+    }
+
+    .msg-img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      background: #ddd;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      border-radius: 50%;
+    }
+
+    .msg-bubble {
+      max-width: 450px;
+      padding: 15px;
+      border-radius: 15px;
+      background: var(--left-msg-bg);
+    }
+
+    .msg-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .msg-info-name {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .msg-info-time {
+      font-size: 0.85em;
+    }
+
+    .left-msg .msg-bubble {
+      border-bottom-left-radius: 0;
+    }
+
+    .right-msg {
+      flex-direction: row-reverse;
+    }
+
+    .right-msg .msg-bubble {
+      background: var(--right-msg-bg);
+      color: #fff;
+      border-bottom-right-radius: 0;
+    }
+
+    .right-msg .msg-img {
+      margin: 0 0 0 10px;
+    }
+
+    .msger-inputarea {
+      display: flex;
+      padding: 10px;
+      border-top: var(--border);
+      background: #eee;
+    }
+
+    .msger-inputarea * {
+      padding: 10px;
+      border: none;
+      border-radius: 3px;
+      font-size: 1em;
+    }
+
+    .msger-input {
+      flex: 1;
+      background: #ddd;
+    }
+
+    .msger-send-btn {
+      margin-left: 10px;
+      background: rgb(0, 196, 65);
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.23s;
+    }
+
+    .msger-send-btn:hover {
+      background: rgb(0, 180, 50);
+    }
+
+    .msger-chat {
+      background-color: #fcfcfe;
+    }
+    /* Your existing CSS styles */
+
+.container {
+    text-align: center; /* Align the text within container */
+}
+
+/* New CSS styles for overlay and loading message */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  display: grid;
+  border-radius: 50%;
+  background:
+    linear-gradient(0deg ,rgb(0 0 0/50%) 30%,#0000 0 70%,rgb(0 0 0/100%) 0) 50%/8% 100%,
+    linear-gradient(90deg,rgb(0 0 0/25%) 30%,#0000 0 70%,rgb(0 0 0/75% ) 0) 50%/100% 8%;
+  background-repeat: no-repeat;
+  animation: l23 1s infinite steps(12);
+}
+.loader::before,
+.loader::after {
+   content: "";
+   grid-area: 1/1;
+   border-radius: 50%;
+   background: inherit;
+   opacity: 0.915;
+   transform: rotate(30deg);
+}
+.loader::after {
+   opacity: 0.83;
+   transform: rotate(60deg);
+}
+@keyframes l23 {
+  100% {transform: rotate(1turn)}
+}
+  </style>
+</head>
+
+<body>
+  <header id="header" class="fixed-top" style="background-color: #7e761a;">
+    <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+          <li><a class="nav-link scrollto active" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+</header>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <section class="msger">
+    <header class="msger-header">
+      <div style="margin-left:300px;
+      font-size: 30px;"class="msger-header-title">
+         AdmitHub Chatbot
+      </div>
+      <!-- <div class="msger-header-options">
+        <span><i class="fas fa-cog"></i></span>
+      </div> -->
+    </header>
+
+    <main class="msger-chat">
+      <div class="msg left-msg">
+        <!--        <div class="msg-img" &lt;!&ndash; style="background-image: url(https://image.flaticon.com/icons/svg/327/327779.svg)" &ndash;&gt;-->
+        <!--          ></div>-->
+
+        <div class="msg-bubble">
+          <div class="msg-info">
+            <div class="msg-info-name"></div>
+          </div>
+
+          <div class="msg-text">
+            Hi, welcome to Chatbot! Go ahead and send me a message. 😄
+          </div>
+        </div>
+      </div>
+   
+      
+
+      <div class="msg right-msg">
+        <!--      <div-->
+        <!--       class="msg-img"-->
+        <!--       style="background-image: url(https://image.flaticon.com/icons/svg/145/145867.svg)"-->
+        <!--      ></div>-->
+
+        <!--      <div class="msg-bubble">-->
+        <!--        <div class="msg-info">-->
+        <!--          <div class="msg-info-name">Sajad</div>-->
+        <!--          <div class="msg-info-time">12:46</div>-->
+        <!--        </div>-->
+
+        <!--        <div class="msg-text">-->
+        <!--          You can change your name in JS section!-->
+        <!--        </div>-->
+      </div>
+    </main>
+
+    <form class="msger-inputarea" onsubmit="send(event); return false;">
+      <input type="text" id="userMessage" class="msger-input" placeholder="Enter your message...">
+      <button type="submit" class="msger-send-btn" id="send_btn" onclick="handleChange()">Send</button>
+    </form>
+
+  </section>
+
+  <script>
+    const msgerForm = get(".msger-inputarea");
+    const msgerInput = get(".msger-input");
+    const msgerChat = get(".msger-chat");
+ 
+    function handleChange() {
+            var btn = document.getElementById("send_btn");
+            // btn.className = "loader"; // Change button class to "loader" to show the loader animation
+            btn.innerText = "Loading..";
+            setTimeout(function() {
+              btn.innerText = "Send"; // Remove the "loader" class after 5000 milliseconds (5 seconds)
+            }, 5000);
+        }
+    function send(event) {
+      console.log("1");
+      event.preventDefault();
+
+      console.log("2");
+      const msgText = msgerInput.value;
+      console.log(msgText);
+      if (!msgText) return;
+
+      appendMessage("right", msgText);
+      msgerInput.value = "";
+
+      sendMessage(msgText);
+
+    }
+
+    function get(selector, root = document) {
+      return root.querySelector(selector);
+    }
+    function appendMessage(side, text) {
+      console.log("In appendmsg");
+      text = text.replace(/\n/g, '<br/>').replace(/\s\s/g, '&nbsp;&nbsp;');
+      const msgHTML = `
+
+    <div class="msg ${side}-msg">
+      <div class="msg-bubble">
+        <div class="msg-text">${text}</div>
+      </div>
+    </div>
+    </div>
+  `;
+      msgerChat.insertAdjacentHTML("beforeend", msgHTML);
+      msgerChat.scrollTop += 500;
+    }
+    function sendMessage(userMessage) {
+      console.log("In send msg");
+      fetch('/chatbot', {
+
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded', // Use form-urlencoded format-->
+        },
+        body: 'userMessage=' + encodeURIComponent(userMessage), // Encode message value-->
+      })
+        .then(response => response.json()) // Parse response as text-->
+        .then(data => {
+          console.log("In send msg 2");
+          console.log(data.response);
+          appendMessage("left", data.response);
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+    }
+    // Send message to Flask server
+
+  </script>
+</body>
+
+</html>

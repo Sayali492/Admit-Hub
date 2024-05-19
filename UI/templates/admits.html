@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+
+
+{% block content %}
+<header id="header" class="fixed-top" style="background-color: #7e761a;">
+    <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+          <li><a class="nav-link scrollto active" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+    </nav>
+</header>
+<br>
+  <br>
+  <br>
+  <style>
+    body{
+        background-color: #f5e1da;
+    }
+  </style>
+  <div class="container" style="background-color: #fefefe; height: 50rem;">
+    <div class="form-group">
+        <div style="text-align: center;">
+            <h2>Actual Admits</h2>
+            <hr>
+            <br>  
+            <h4>This form is a crucial component of our website, designed to gather detailed information about the universities where individuals have been admitted.</h4>
+            <hr>
+            <br>  
+        </div>
+        <form id="firstForm" method="POST">
+            {{ csrf_token }} {# Insert CSRF token here #}
+            <h5><label id="label" for="exampleFormControlSelect1">Number of Universities you got admits from</label></h5>
+            <select name="number_of_unis" class="form-control" id="exampleFormControlSelect1">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+            </select>
+            <br>
+            <div style="text-align: center;">
+                <button type="button" id="button1" onclick="addDropdowns()" class="btn btn-primary">Submit Number</button>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Second form -->
+    <form id="secondForm" method="post" action="{{ url_for('valid') }}">
+        {{ csrf_token }} {# Insert CSRF token here #}
+        <div id="additionalDropdowns" name="admits" style="text-align: center;"></div>
+        <br>
+        <!-- Submit button at the bottom center -->
+        <div style="text-align: -moz-center;">
+            <button style="display: none; align-items: center;" id="button2" type="button" class="btn btn-primary" onclick="submitForms()">Submit</button>
+        </div>
+    </form>
+</div>
+
+<script>
+    function addDropdowns() {
+        var selectElement = document.getElementById("exampleFormControlSelect1");
+        var selectedValue = selectElement.value;
+        console.log(selectedValue);
+        var additionalDropdownsDiv = document.getElementById("additionalDropdowns");
+        additionalDropdownsDiv.innerHTML = ""; // Clear previous dropdowns
+
+        for (var i = 0; i < selectedValue; i++) {
+            var dropdownHTML = `
+                <div class="form-group">
+                    <select style="text-transform: capitalize;height:40px;" name="selectunis_${i + 1}" class="form-select" id="exampleFormControlSelect${i + 1}" style="height:3rem;font-weight:100">
+                        <option selected>University ${i + 1}</option>
+                        {% for value, label in options %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            `;
+            additionalDropdownsDiv.innerHTML += dropdownHTML;
+        }
+        document.getElementById("button2").style.display = "block";
+        document.getElementById("button1").style.display = "none";
+        document.getElementById("exampleFormControlSelect1").style.display = "none";
+        document.getElementById("label").style.display = "none";
+    }
+
+    function submitForms() {
+        // Gather data from the first form
+        var formData1 = new FormData(document.getElementById('firstForm'));
+
+        // Gather data from the second form
+        var formData2 = new FormData(document.getElementById('secondForm'));
+
+        // Merge form data from both forms
+        var mergedFormData = new FormData();
+        for (var pair of formData1.entries()) {
+            mergedFormData.append(pair[0], pair[1]);
+        }
+        for (var pair of formData2.entries()) {
+            mergedFormData.append(pair[0], pair[1]);
+        }
+
+        // Submit the merged form data
+        fetch('{{ url_for('valid') }}', {
+            method: 'POST',
+            body: mergedFormData
+        }).then(response => {
+            if (response.ok) {
+                alert('Form submitted successfully');
+                location.reload();
+            } else {
+                alert('Form submission failed');
+            }
+        }).catch(error => {
+            alert('Form submission failed');
+        });
+    }
+</script>
+{% endblock %}

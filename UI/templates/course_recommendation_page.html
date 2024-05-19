@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="{{ url_for('static',filename='style1.css')}}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='style.css')}}" rel="stylesheet">
+    <style>
+         body {
+      background-color: #f5e1da;
+      ;
+    }
+    #universityDropdown{
+        text-transform: capitalize;
+    }
+    #courseDropdown{
+        text-transform: capitalize;
+    }
+
+    </style>
+</head>
+
+<body>
+    <header id="header" class="fixed-top" style="background-color: #7e761a;">
+        <nav id="navbar" class="navbar order-last order-lg-0">
+            <ul>
+              <li><a class="nav-link scrollto " href="{{ url_for('view_home') }}" style="font-size: 18px;">Home</a></li>
+              <li><a class="nav-link scrollto " href="{{ url_for('view_first_page') }}" style="font-size: 18px;">Recommendation</a></li>
+              <li><a class="nav-link scrollto active" href="{{ url_for('view_course_page') }}" style="font-size: 18px;">Course Admit</a></li>
+              <li><a class="nav-link scrollto" href="{{ url_for('chat') }}" style="font-size: 18px;">Chatbot</a></li>
+              <li><a class="nav-link scrollto" href="{{ url_for('valid') }}" style="font-size: 18px;">Admits</a></li>
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav>
+    </header>
+    <br><br><br><br>
+    <div class="container">
+        <form method="POST" action="/rec_course">
+            {{ form.csrf_token }}
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    <label for="gpa">GPA<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="gpa" name="gpa" placeholder="GPA" required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="scale">Scale<span style="color: red;">*</span></label>
+                    <select id="scale" class="form-control" name="scale" required>
+                        <option selected>Choose</option>
+                        <option value="4">4</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="100">100</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-12">
+                    <label for="toefl">Toefl Score<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="toefl" name="toefl" placeholder="Toefl Score" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="gre_quant">GRE Quant<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="gre_quant" name="gre_quant" placeholder="GRE Quant"
+                        required>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="gre_verbal">GRE Verbal<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="gre_verbal" name="gre_verbal" placeholder="GRE Verbal"
+                        required>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="gre_awa">GRE AWA<span style="color: red;">*</span></label>
+                    <input type="text" class="form-control" id="gre_awa" name="gre_awa" placeholder="GRE AWA" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="publications">Publications</label>
+                    <!-- <input type="text" class="form-control" id="publications" name="publications" placeholder="Publications"> -->
+                    <select id="publications" class="form-control" name="publication" required>
+                        <option selected>Choose</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label for="research_exp">Research Experience</label>
+                    <!-- <input type="text" class="form-control" id="research_exp" name="research_exp" -->
+                    <!-- placeholder="Research Experience"> -->
+                    <select id="research_exp" class="form-control" name="re_exp" required>
+                        <option selected>Choose</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="work_exp">Work Experience</label>
+                    <!-- <input type="text" class="form-control" id="work_exp" name="work_exp" placeholder="Work Experience"> -->
+                    <!-- <label for="scale">Scale</label> -->
+                    <select id="work_exp" class="form-control" name="work_exp" required>
+                        <option selected>Choose</option>
+                        <option value="1">Yes</option>
+                        <option value="0">No</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="budget">Degree<span style="color: red;">*</span></label>
+                    <select id="scale" class="form-control" name="degree" required>
+                        <option selected>Choose</option>
+                        <option value="1">Masters</option>
+                        <option value="0">Masters and PhD</option>
+                        <option value="3">PhD</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="university">University</label>
+                    <select class="form-select" id="universityDropdown" name="university" required>
+                        <option selected>Choose...</option>
+                        {% for value, label in options %}
+                        <option value="{{ value }}">{{ label }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <!-- <button type="submit" class="btn btn-primary">Search Courses</button> -->
+            </div>
+            <br>
+            <div class="form-row">
+                <div class="input-group mb-3">
+                    <label class="input-group-text" for="course">Course</label required>
+                    <select class="form-select" id="courseDropdown" name="course">
+                        <option selected>Choose...</option>
+                    </select>
+                </div>
+            </div>
+            <br>
+
+            <button type="submit" class="btn btn-primary">Predict</button>
+        </form>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script>
+        // const dropdown = document.getElementById('universityDropdown');
+
+        // Add event listener to the dropdown
+
+        // Do something with the selected value
+        // console.log('Selected value:', selectedOption,selectedText);
+        // Function to fetch and parse JSON data
+        function fetchJSON() {
+            fetch('/get_json') // Path to your JSON file
+                .then(response => response.json())
+                .then(data => {
+                    const universityDropdown = document.getElementById('universityDropdown');
+                    // const selectedUniversity = universityDropdown.value;
+                    universityDropdown.addEventListener('change', function () {
+                        // Extract the selected value
+                        // const selectedValue = dropdown.textContent;
+                        const selectedOption = universityDropdown.options[universityDropdown.selectedIndex];
+                        const selectedText = selectedOption.textContent;
+                        console.log(selectedOption, selectedText);
+
+
+                        // Get the array of course names associated with the selected university
+                        const courseNames = data[selectedText];
+
+                        // Populate the course dropdown with the course names
+                        const courseDropdown = document.getElementById('courseDropdown');
+                        courseDropdown.innerHTML = ''; // Clear previous options
+
+                        // Create and append option elements for each course name
+                        courseNames.forEach(course => {
+                            const option = document.createElement('option');
+                            option.textContent = course;
+                            courseDropdown.appendChild(option);
+                        })
+                    });
+                })
+                .catch(error => console.error('Error fetching JSON:', error));
+        }
+
+        // Event listener to trigger fetching JSON data when the university dropdown changes
+        document.getElementById('universityDropdown').addEventListener('change', fetchJSON);
+
+        // Initial fetch when the page loads
+        fetchJSON();
+
+    </script>
+</body>
+
+</html>
